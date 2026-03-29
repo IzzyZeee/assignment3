@@ -26,7 +26,6 @@ export default function CubicEquation
 
         function cardano(a: number, b: number, p: number, q: number) { // Calculates a single root
             return String(trueZero((Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a))).toFixed(2)); // Truncated to 2 decimal places like on the example
-            // return Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a); // Non truncated version
         }
 
         function trueZero(n: number) { // To rid of floating point errors. Threshold may vary
@@ -37,12 +36,12 @@ export default function CubicEquation
             return n; // If not, return normally
         }
 
-        const p = trueZero((3 * a * c - b * b) / (3 * a * a));
-        const q = trueZero((27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a));
-        const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); 
+        const p = (3 * a * c - b * b) / (3 * a * a);
+        const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
+        const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); // set delta to zero if it is
 
-        setP(p.toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)
-        setQ(q.toFixed(5));
+        setP(trueZero(p).toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)
+        setQ(trueZero(q).toFixed(5));
         setDelta(delta.toFixed(5));
         setD(d.toFixed(2));
 
