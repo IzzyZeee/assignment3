@@ -24,19 +24,14 @@ export default function CubicEquation
         const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
         const delta = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
 
-        setP(p);
-        setQ(q);
-        setDelta(delta);
-        setD(d);
-
-        function truncate(num: number, places: number) { // To truncate to 5 or 2 decimal places because the example does so
-            const multiplied = num * Math.pow(10, places); // ex. 1.1234, 2 becomes 112.34
-            const result = Math.trunc(multiplied) / Math.pow(10, places); // Cut off decimal, divide by power of 10 ex. 112.34 becomes 112 becomes 1.12
-            return result;
-        }
+        setP(Number(p.toFixed(5))); // must cast to Number. toFixed fixes it to 5 places (truncate function not needed)
+        setQ(Number(q.toFixed(5)));
+        setDelta(Number(delta.toFixed(5)));
+        setD(Number(d.toFixed(2)));
 
         function cardano(a: number, b: number, p: number, q: number) { // Calculates a single root
-            return truncate(Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a), 2); // Truncated to 2 decimal places like on the example
+            return Number((Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a)).toFixed(2)); // Truncated to 2 decimal places like on the example
+            // return Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a); // Non truncated version
         }
 
         if (Math.abs(delta) < 1e-15) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
@@ -52,18 +47,18 @@ export default function CubicEquation
             } else { // Case C2: Double root
 
                 setX1(cardano(a, b, p, q)); // Double
-                setX2(truncate(Math.cbrt(q / 2) - b / (3 * a), 2)); // Single
+                setX2(Number((Math.cbrt(q / 2) - b / (3 * a)).toFixed(2))); // Single
                 // setX3(x2); // Same as x2
-                setX3(truncate(Math.cbrt(q / 2) - b / (3 * a), 2));
+                setX3(Number((Math.cbrt(q / 2) - b / (3 * a)).toFixed(2)));
 
             }
 
         } else if (delta < 0) { // Case A: 3 real roots
 
             const theta = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
-            setX1(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a), 2));
-            setX2(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a), 2));
-            setX3(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a), 2));
+            setX1(Number((2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a)).toFixed(2)));
+            setX2(Number((2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a)).toFixed(2)));
+            setX3(Number((2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a)).toFixed(2)));
 
         } else { // Case B: Delta > 0, 1 real root and 2 complex roots
 
