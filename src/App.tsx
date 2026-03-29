@@ -8,7 +8,7 @@ import CubicEquation from "./CubicEquation.tsx";
 // import CubicGraph from "./CubicGraph.tsx";
 // import CubicHistory from "./CubicHistory.tsx";
 import CubicInput from "./CubicInput.tsx";
-// import CubicTable from "./CubicTable.tsx";
+import CubicTable from "./CubicTable.tsx";
 
 function App() {
 
@@ -29,6 +29,12 @@ const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SS
         update={setInput}
       >
       </CubicEquation>
+      
+      <CubicTable
+        coefficients={input}
+        update={setInput}
+      >
+      </CubicTable>
     </div>
 
   )
