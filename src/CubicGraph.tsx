@@ -4,11 +4,16 @@ import { useState, useRef, useEffect } from "react";
 export default function CubicGraph
 
 ({ coefficients, update }: UpdateCoefficient) {
-    
-    const [equation, setEquation] = useState<string>(""); // State for Equation
+    const canvasRef = useRef<HTMLCanvasElement>(null); // Create a ref for canvas
 
     useEffect (() => {
-    
+
+        const a = coefficients.a;
+        const b = coefficients.b;
+        const c = coefficients.c;
+        const d = coefficients.d;
+
+        if (!canvasRef.current) return;
         const canvas = document.getElementById("graph");
         const ctx = canvas.getContext("2d");
         const xMin = -12; // Determine how many units it extends for relative to axis origin, ideally square
