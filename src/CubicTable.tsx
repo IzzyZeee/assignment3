@@ -23,24 +23,32 @@ export default function CubicEquation
         if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
             return;
         }
-        
-        const p = (3 * a * c - b * b) / (3 * a * a);
-        const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
-        const delta = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+
+        function cardano(a: number, b: number, p: number, q: number) { // Calculates a single root
+            return String(trueZero((Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a))).toFixed(2)); // Truncated to 2 decimal places like on the example
+            // return Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a); // Non truncated version
+        }
+
+        function trueZero(n: number) { // To rid of floating point errors. Threshold may vary
+            const threshold = 1e-15;
+            if (Math.abs(n) < threshold) { // If floating point error
+                return 0;
+            }
+            return n; // If not, return normally
+        }
+
+        const p = trueZero((3 * a * c - b * b) / (3 * a * a));
+        const q = trueZero((27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a));
+        const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); 
 
         setP(p.toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)
         setQ(q.toFixed(5));
         setDelta(delta.toFixed(5));
         setD(d.toFixed(2));
 
-        function cardano(a: number, b: number, p: number, q: number) { // Calculates a single root
-            return String((Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a)).toFixed(2)); // Truncated to 2 decimal places like on the example
-            // return Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a); // Non truncated version
-        }
+        
 
         if (Math.abs(delta) < 1e-15) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
-
-            setDelta("0.00000"); // Turns delta to zero
 
             if (Math.abs(p) < 1e-15 && Math.abs(q) < 1e-15) { // Case C1: Triple root when p = q = 0
             
@@ -51,17 +59,17 @@ export default function CubicEquation
             } else { // Case C2: Double root
 
                 setX1(cardano(a, b, p, q)); // Double
-                setX2((Math.cbrt(q / 2) - b / (3 * a)).toFixed(2)); // Single
-                setX3((Math.cbrt(q / 2) - b / (3 * a)).toFixed(2));
+                setX2(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2)); // Single
+                setX3(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2));
 
             }
 
         } else if (delta < 0) { // Case A: 3 real roots
 
             const theta = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
-            setX1((2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a)).toFixed(2));
-            setX2((2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
-            setX3((2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
+            setX1(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a)).toFixed(2));
+            setX2(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
+            setX3(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
 
         } else { // Case B: Delta > 0, 1 real root and 2 complex roots
 
