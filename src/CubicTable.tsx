@@ -5,8 +5,8 @@ export default function CubicEquation
 
 ({ coefficients, update }: UpdateCoefficient) {
     
-    const [p, setP] = useState<number>(0); // States include p, q, delta, x1/2/3
-    const [q, setQ] = useState<number>(0);
+    const [p_val, setP] = useState<number>(0); // States include p, q, delta, x1/2/3
+    const [q_val, setQ] = useState<number>(0);
     const [delta_val, setDelta] = useState<number>(0);
     const [x1, setX1] = useState<number>(0);
     const [x2, setX2] = useState<number>(0);
@@ -20,12 +20,12 @@ export default function CubicEquation
         const c = coefficients.c;
         const d = coefficients.d;
               
-        const p_val = (3 * a * c - b * b) / (3 * a * a);
-        const q_val = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
+        const p = (3 * a * c - b * b) / (3 * a * a);
+        const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
         const delta = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
 
-        setP(p_val);
-        setQ(q_val);
+        setP(p);
+        setQ(q);
         setDelta(delta);
         setD(d);
 
@@ -45,36 +45,25 @@ export default function CubicEquation
 
             if (Math.abs(p) < 1e-15 && Math.abs(q) < 1e-15) { // Case C1: Triple root when p = q = 0
             
-                setX1(
-                    cardano(a, b, p, q)
-                );
-                setX2(x1);
-                setX3(x1);
+                setX1(cardano(a, b, p, q));
+                setX2(cardano(a, b, p, q));
+                setX3(cardano(a, b, p, q));
 
             } else { // Case C2: Double root
 
-                setX1( // Double
-                    cardano(a, b, p, q)
-                );
-                setX2( // Single
-                    truncate(Math.cbrt(q / 2) - b / (3 * a), 2)
-                );
-                setX3(x2); // Same as x2
+                setX1(cardano(a, b, p, q)); // Double
+                setX2(truncate(Math.cbrt(q / 2) - b / (3 * a), 2)); // Single
+                // setX3(x2); // Same as x2
+                setX3(truncate(Math.cbrt(q / 2) - b / (3 * a), 2));
 
             }
 
         } else if (delta < 0) { // Case A: 3 real roots
 
             const theta = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
-            setX1(
-                truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a), 2)
-            );
-            setX2(
-                truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a), 2)
-            );
-            setX3(
-                truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a), 2)
-            );
+            setX1(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a), 2));
+            setX2(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a), 2));
+            setX3(truncate(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a), 2));
 
         } else { // Case B: Delta > 0, 1 real root and 2 complex roots
 
@@ -92,13 +81,13 @@ export default function CubicEquation
             <tr>
               <td>p</td>
               <td>
-                {p}
+                {p_val}
               </td>
             </tr>
             <tr>
               <td>q</td>
               <td>
-                {q}
+                {q_val}
               </td>
             </tr>
             <tr>
