@@ -7,28 +7,27 @@ export default function CubicEquation
     
     const [p, setP] = useState<number>(0); // States include p, q, delta, x1/2/3
     const [q, setQ] = useState<number>(0);
-    const [delta, setDelta] = useState<number>(0);
+    const [delta_val, setDelta] = useState<number>(0);
     const [x1, setX1] = useState<number>(0);
     const [x2, setX2] = useState<number>(0);
     const [x3, setX3] = useState<number>(0);
-    const [d, setD] = useState<number>(0); // y-intercept
+    const [d_val, setD] = useState<number>(0); // y-intercept
 
     useEffect (() => {
     
         const a = coefficients.a;
         const b = coefficients.b;
         const c = coefficients.c;
-        setD(coefficients.d);
-                
-        setP(
-            (3 * a * c - b * b) / (3 * a * a)
-        );
-        setQ(
-            (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a)
-        );
-        setDelta(
-            Math.pow(q / 2, 2) + Math.pow(p / 3, 3)
-        );
+        const d = coefficients.d;
+              
+        const p_val = (3 * a * c - b * b) / (3 * a * a);
+        const q_val = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
+        const delta = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+
+        setP(p_val);
+        setQ(q_val);
+        setDelta(delta);
+        setD(d);
 
         function truncate(num: number, places: number) { // To truncate to 5 or 2 decimal places because the example does so
             const multiplied = num * Math.pow(10, places); // ex. 1.1234, 2 becomes 112.34
@@ -105,7 +104,7 @@ export default function CubicEquation
             <tr>
               <td>Discriminant</td>
               <td>
-                {delta}
+                {delta_val}
               </td>
             </tr>
           </table>
@@ -140,7 +139,7 @@ export default function CubicEquation
               <td>y-intercept</td>
               <td>0</td>
               <td>
-                {d}
+                {d_val}
               </td>
             </tr>
           </table>
