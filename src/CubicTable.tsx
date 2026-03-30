@@ -47,9 +47,9 @@ export default function CubicEquation
 
         
 
-        if (Math.abs(delta) < 1e-15) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
+        if (delta < 0) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
 
-            if (Math.abs(p) < 1e-15 && Math.abs(q) < 1e-15) { // Case C1: Triple root when p = q = 0
+            if (trueZero(p) === 0 && trueZero(q) === 0) { // Case C1: Triple root when p = q = 0
             
                 setX1(cardano(a, b, p, q));
                 setX2(cardano(a, b, p, q));
