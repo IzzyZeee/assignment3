@@ -5,6 +5,7 @@ import { trueZero, cardano, getRoots } from "../Functions.tsx";
 export default function CubicGraph
 
 ({ coefficients, update }: UpdateCoefficient) {
+    
     const canvasRef = useRef<HTMLCanvasElement>(null); // Create a ref for canvas
 
     useEffect (() => {
@@ -17,17 +18,26 @@ export default function CubicGraph
         const p = (3 * a * c - b * b) / (3 * a * a);
         const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
         const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3));
-        
-        let x1;
-        let x2;
-        let x3;
 
-        if (!canvasRef.current) return; // Makes sure canvas exists to get rid of error
+        const roots = getRoots(a, b, p, q, delta);
 
-        const canvas = document.getElementById("graph");
+        let x1 = Number(roots[0]); // x1 always has a value
+        let x2 = Number(roots[1]); // MAY BE NaN
+        let x3 = Number(roots[2]); // MAY BE NaN
+
+        if (!canvasRef.current) {
+                        console.log("CANVAS IS NULL");
+
+            return; // Makes sure canvas exists to get rid of error
+        }
+        // const canvas = document.getElementById("graph");
+        const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
 
-        if (!ctx) return; // Makes sure ctx exists
+        if (!ctx) {
+            console.log("CTX IS NULL");
+            return; 
+        } // Makes sure ctx exists
 
         const xMin = -12; // Determine how many units it extends for relative to axis origin, ideally square
         const xMax = 12;
@@ -48,8 +58,7 @@ export default function CubicGraph
             return py;
         }
 
-        function calculateCubic(x: number) {
-            // Simply to get x-y input-output
+        function calculateCubic(x: number) { // Simply to get x-y input-output
             return a * Math.pow(x, 3) + b * Math.pow(x, 2) + c * x + d;
         }
 
@@ -175,7 +184,9 @@ export default function CubicGraph
 
     return (
         <div>
-            <canvas id="graph" width="600" height="600"></canvas>
+            {/* <canvas width="600" height="600"></canvas> */}
+            <canvas ref={canvasRef} width="600" height="600" style={{ border: "1px solid black" }}>
+            </canvas>
         </div>
     )
 }

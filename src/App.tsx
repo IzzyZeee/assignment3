@@ -36,7 +36,11 @@ const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SS
       >
       </CubicTable>
 
-      
+      <CubicGraph
+        coefficients={input}
+        update={setInput}
+      >
+      </CubicGraph>      
     </div>
 
   )
