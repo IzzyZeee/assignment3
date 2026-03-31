@@ -5,8 +5,8 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import type{ Coefficient } from "./TypesToUse/Types.tsx";
 import CubicEquation from "./Components/CubicEquation.tsx";
-// import CubicGraph from "./CubicGraph.tsx";
-// import CubicHistory from "./CubicHistory.tsx";
+import CubicGraph from "./Components/CubicGraph.tsx";
+// import CubicHistory from "./Components/CubicHistory.tsx";
 import CubicInput from "./Components/CubicInput.tsx";
 import CubicTable from "./Components/CubicTable.tsx";
 

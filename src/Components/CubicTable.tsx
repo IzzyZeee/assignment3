@@ -1,5 +1,6 @@
 import type{ Coefficient, UpdateCoefficient } from "../TypesToUse/Types.tsx";
 import { useState, useRef, useEffect } from "react";
+import { trueZero, cardano, getRoots } from "../Functions.tsx";
 
 export default function CubicEquation
 
@@ -15,70 +16,37 @@ export default function CubicEquation
 
     useEffect (() => {
     
-        const a = coefficients.a;
-        const b = coefficients.b;
-        const c = coefficients.c;
-        const d = coefficients.d;
+      const a = coefficients.a;
+      const b = coefficients.b;
+      const c = coefficients.c;
+      const d = coefficients.d;
 
-        if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
-            return;
-        }
+      const p = (3 * a * c - b * b) / (3 * a * a);
+      const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
+      const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); // set delta to zero if it is
 
-        function cardano(a: number, b: number, p: number, q: number) { // Calculates a single root
-            return String(trueZero((Math.cbrt(-q / 2 + Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) + Math.cbrt(-q / 2 - Math.sqrt(Math.pow(q / 2, 2) + Math.pow(p / 3, 3))) - b / (3 * a))).toFixed(2)); // Truncated to 2 decimal places like on the example
-        }
+      if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
+          return;
+      }
 
-        function trueZero(n: number) { // To rid of floating point errors. Threshold may vary
-            const threshold = 1e-15;
-            if (Math.abs(n) < threshold) { // If floating point error
-                return 0;
-            }
-            return n; // If not, return normally
-        }
+      setP(trueZero(p).toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)
+      setQ(trueZero(q).toFixed(5));
+      setDelta(delta.toFixed(5));
+      setD(d.toFixed(2));
 
-        const p = (3 * a * c - b * b) / (3 * a * a);
-        const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
-        const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); // set delta to zero if it is
+      const roots = getRoots(a, b, p, q, delta);
+      
+      setX1(String(roots[0])); // x1 always has a value
 
-        setP(trueZero(p).toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)
-        setQ(trueZero(q).toFixed(5));
-        setDelta(delta.toFixed(5));
-        setD(d.toFixed(2));
-
-        
-
-        if (delta < 0) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
-
-            if (trueZero(p) === 0 && trueZero(q) === 0) { // Case C1: Triple root when p = q = 0
+      if (Number.isNaN(roots[1])) { // If x2 is NaN x3 is also NaN (Case B)
+        setX2("Complex Number");
+        setX3("Complex Number");
+      } else {
+        setX2(String(roots[1]));
+        setX3(String(roots[2]));
+      }
             
-                setX1(cardano(a, b, p, q));
-                setX2(cardano(a, b, p, q));
-                setX3(cardano(a, b, p, q));
-
-            } else { // Case C2: Double root
-
-                setX1(cardano(a, b, p, q)); // Double
-                setX2(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2)); // Single
-                setX3(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2));
-
-            }
-
-        } else if (delta < 0) { // Case A: 3 real roots
-
-            const theta = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
-            setX1(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a)).toFixed(2));
-            setX2(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
-            setX3(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
-
-        } else { // Case B: Delta > 0, 1 real root and 2 complex roots
-
-            setX1(cardano(a, b, p, q));
-            setX2("Complex Number");
-            setX3("Complex Number");
-
-        }
-            
-    }, [coefficients]); // useEffect's second [] parameter means it'll only run when [] udpates
+    }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
 
     return (
         <div>
