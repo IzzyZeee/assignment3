@@ -5,7 +5,7 @@ import { trueZero, cardano, getRoots } from "../Functions.tsx";
 export default function CubicGraph
 
 ({ coefficients, update }: UpdateCoefficient) {
-    
+
     const canvasRef = useRef<HTMLCanvasElement>(null); // Create a ref for canvas
 
     useEffect (() => {
@@ -25,19 +25,10 @@ export default function CubicGraph
         let x2 = Number(roots[1]); // MAY BE NaN
         let x3 = Number(roots[2]); // MAY BE NaN
 
-        if (!canvasRef.current) {
-                        console.log("CANVAS IS NULL");
-
-            return; // Makes sure canvas exists to get rid of error
-        }
-        // const canvas = document.getElementById("graph");
         const canvas = canvasRef.current;
+        if (!canvasRef.current) return;
         const ctx = canvas.getContext("2d");
-
-        if (!ctx) {
-            console.log("CTX IS NULL");
-            return; 
-        } // Makes sure ctx exists
+        if (!ctx) return;
 
         const xMin = -12; // Determine how many units it extends for relative to axis origin, ideally square
         const xMax = 12;
@@ -184,7 +175,6 @@ export default function CubicGraph
 
     return (
         <div>
-            {/* <canvas width="600" height="600"></canvas> */}
             <canvas ref={canvasRef} width="600" height="600" style={{ border: "1px solid black" }}>
             </canvas>
         </div>
