@@ -1,4 +1,4 @@
-import type{ Coefficient, UpdateCoefficient } from "./TypesToUse/Types.tsx";
+import type{ Coefficient, UpdateCoefficient } from "../TypesToUse/Types.tsx";
 import { useState, useRef, useEffect } from "react";
 
 export default function CubicGraph
@@ -13,9 +13,56 @@ export default function CubicGraph
         const c = coefficients.c;
         const d = coefficients.d;
 
-        if (!canvasRef.current) return;
+        function trueZero(n: number) { // To rid of floating point errors. Threshold may vary
+            const threshold = 1e-15;
+            if (Math.abs(n) < threshold) { // If floating point error
+                return 0;
+            }
+            return n; // If not, return normally
+        }
+
+        const p = (3 * a * c - b * b) / (3 * a * a);
+        const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
+        const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3));
+
+        if (delta < 0) { // Case C: Delta equals 0, but sometimes the computer can't actually get the zero so it becomes very close to zero, which we detect under the threshold (between 0 and 1e-15)
+
+            if (trueZero(p) === 0 && trueZero(q) === 0) { // Case C1: Triple root when p = q = 0
+            
+                setX1(cardano(a, b, p, q));
+                setX2(cardano(a, b, p, q));
+                setX3(cardano(a, b, p, q));
+
+            } else { // Case C2: Double root
+
+                setX1(cardano(a, b, p, q)); // Double
+                setX2(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2)); // Single
+                setX3(trueZero(Math.cbrt(q / 2) - b / (3 * a)).toFixed(2));
+
+            }
+
+        } else if (delta < 0) { // Case A: 3 real roots
+
+            const theta = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
+            setX1(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a)).toFixed(2));
+            setX2(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
+            setX3(trueZero(2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a)).toFixed(2));
+
+        } else { // Case B: Delta > 0, 1 real root and 2 complex roots
+
+            setX1(cardano(a, b, p, q));
+            setX2("Complex Number");
+            setX3("Complex Number");
+
+        }
+
+        if (!canvasRef.current) return; // Makes sure canvas exists to get rid of error
+
         const canvas = document.getElementById("graph");
         const ctx = canvas.getContext("2d");
+
+        if (!ctx) return; // Makes sure ctx exists
+
         const xMin = -12; // Determine how many units it extends for relative to axis origin, ideally square
         const xMax = 12;
         const yMin = -12;
@@ -124,7 +171,7 @@ export default function CubicGraph
 
         }
 
-        function drawRoots() {
+        function drawRoots() { // roots were defined way at the top
 
             drawDot(coordToPixelX(x1), coordToPixelY(0), "rgba(65, 107, 186)"); // x1 will always be a root
 

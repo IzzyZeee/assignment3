@@ -1,4 +1,4 @@
-import type{ Coefficient, UpdateCoefficient } from "./TypesToUse/Types.tsx";
+import type{ Coefficient, UpdateCoefficient } from "../TypesToUse/Types.tsx";
 import { useState, useRef } from "react";
 
 export default function CubicInput

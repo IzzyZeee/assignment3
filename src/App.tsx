@@ -4,11 +4,11 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import type{ Coefficient } from "./TypesToUse/Types.tsx";
-import CubicEquation from "./CubicEquation.tsx";
+import CubicEquation from "./Components/CubicEquation.tsx";
 // import CubicGraph from "./CubicGraph.tsx";
 // import CubicHistory from "./CubicHistory.tsx";
-import CubicInput from "./CubicInput.tsx";
-import CubicTable from "./CubicTable.tsx";
+import CubicInput from "./Components/CubicInput.tsx";
+import CubicTable from "./Components/CubicTable.tsx";
 
 function App() {
 
