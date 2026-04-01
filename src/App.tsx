@@ -1,12 +1,9 @@
 import { useState, useRef } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import type{ Coefficient } from "./TypesToUse/Types.tsx";
 import CubicEquation from "./Components/CubicEquation.tsx";
 import CubicGraph from "./Components/CubicGraph.tsx";
-// import CubicHistory from "./Components/CubicHistory.tsx";
+import CubicHistory from "./Components/CubicHistory.tsx";
 import CubicInput from "./Components/CubicInput.tsx";
 import CubicTable from "./Components/CubicTable.tsx";
 
@@ -41,6 +38,42 @@ const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SS
         update={setInput}
       >
       </CubicGraph>      
+
+      {/* <table>
+        <tr>
+          <td>a</td>
+          <td>b</td>
+          <td>c</td>
+          <td>d</td>
+        </tr>
+        <tr onClick={ () => 
+          <CubicHistory
+            coefficients={input}
+            update={setInput}
+          >
+          </CubicHistory>
+        }>
+          
+        </tr>
+      </table> */}
+
+      <CubicHistory
+        coefficients={input}
+        update={setInput}
+      >
+        <table>
+          {items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </table>
+      
+      <button
+        onClick={() => setItems([...items, "New Item"])}
+      >
+        Save that cubic!
+      </button>
+
+      </CubicHistory>
     </div>
 
   )

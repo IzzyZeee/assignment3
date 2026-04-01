@@ -26,7 +26,7 @@ export default function CubicEquation
       const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3)); // set delta to zero if it is
 
       if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
-          return;
+        return;
       }
 
       setP(trueZero(p).toFixed(5)); // It's a string. toFixed fixes it to 5 places (truncate function not needed)

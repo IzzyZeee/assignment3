@@ -19,6 +19,10 @@ export default function CubicGraph
         const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
         const delta = trueZero(Math.pow(q / 2, 2) + Math.pow(p / 3, 3));
 
+        if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
+            return;
+        }
+        
         const roots = getRoots(a, b, p, q, delta);
 
         let x1 = Number(roots[0]); // x1 always has a value
