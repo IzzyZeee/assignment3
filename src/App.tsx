@@ -14,7 +14,7 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
 
   return (
 
-    <div>
+    <div style={{"fontFamily":"courier-new, verdana, arial, sans-serif","lineHeight":"1.67","fontWeight":"400","colorScheme":"light","color":"rgba(9, 69, 74, 0.87)","backgroundImage":"linear-gradient(200deg, rgba(62, 98, 95), rgba(80, 152, 146))"}}>
       <CubicInput
         coefficients={input} // putting in parameters of CubicInput, coefficients and update
         update={setInput} // input and setInput are defined above

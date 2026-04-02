@@ -49,7 +49,7 @@ export default function CubicEquation
     }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
   
     return (
-      <div style={{"width":"550px","marginBottom":"50px","borderRadius":"5px","boxShadow":"5px 5px 20px rgba(1, 14, 19, 0.4)","backgroundColor":"rgba(255, 255, 255)"}}>
+      <div style={{"width":"550px","marginBottom":"50px","padding":"10px","borderRadius":"5px","boxShadow":"5px 5px 20px rgba(1, 14, 19, 0.4)","backgroundColor":"rgba(255, 255, 255)"}}>
         <table style={{"fontSize":"20px"}}>
           <tr style={{"height":"40px"}}>
             <td style={{"width":"150px","borderBottom":"1px dashed rgba(62, 98, 95)"}}>
@@ -75,7 +75,7 @@ export default function CubicEquation
           </tr>
         </table>
         <table style={{"fontSize":"20px"}}>
-          <tr style={{"width":"100px","height":"40px","color":"rgba(255, 255, 255)","backgroundColor":"rgba(62, 98, 95)"}}>
+          <tr style={{"width":"200px","height":"40px","color":"rgba(255, 255, 255)","backgroundColor":"rgba(62, 98, 95)"}}>
             <td style={{"width":"150px"}}>
               Value
             </td>

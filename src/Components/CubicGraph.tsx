@@ -178,7 +178,7 @@ export default function CubicGraph
     }, [coefficients]); // useEffect's second [] parameter means it'll only run when [] udpates
 
     return (
-        <div>
+        <div style={{"width":"620px","height":"620px","padding":"10px","borderRadius":"5px","marginBottom":"50px","marginRight":"50px","marginLeft":"50px","backgroundColor":"rgba(255, 255, 255)"}}>
             <canvas ref={canvasRef} width="600" height="600" style={{ border: "1px solid black" }}>
             </canvas>
         </div>
