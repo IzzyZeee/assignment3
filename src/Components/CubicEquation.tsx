@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function CubicEquation
 
-({ coefficients, update }: UpdateCoefficient) {
+({ coefficients, update, history, saveHistory }: UpdateCoefficient) {
     
     const [equation, setEquation] = useState<string>(""); // State for Equation
 

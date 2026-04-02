@@ -4,7 +4,7 @@ import { trueZero, cardano, getRoots } from "../Functions.tsx";
 
 export default function CubicGraph
 
-({ coefficients, update }: UpdateCoefficient) {
+({ coefficients, update, history, saveHistory }: UpdateCoefficient) {
 
     const canvasRef = useRef<HTMLCanvasElement>(null); // Create a ref for canvas
 

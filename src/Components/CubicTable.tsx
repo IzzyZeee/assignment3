@@ -4,7 +4,7 @@ import { trueZero, cardano, getRoots } from "../Functions.tsx";
 
 export default function CubicEquation
 
-({ coefficients, update }: UpdateCoefficient) {
+({ coefficients, update, history, saveHistory }: UpdateCoefficient) {
     
     const [p_val, setP] = useState<string>(""); // States include p, q, delta, x1/2/3
     const [q_val, setQ] = useState<string>(""); // I made them String because number will chop off useless zeros
@@ -45,79 +45,68 @@ export default function CubicEquation
         setX2(String(roots[1]));
         setX3(String(roots[2]));
       }
-            
+
     }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
 
     return (
-        <div>
-          <table>
-            <tr>
-              <td>p</td>
-              <td>
-                {p_val}
-              </td>
-            </tr>
-            <tr>
-              <td>q</td>
-              <td>
-                {q_val}
-              </td>
-            </tr>
-            <tr>
-              <td>Discriminant</td>
-              <td>
-                {delta_val}
-              </td>
-            </tr>
-          </table>
-          <table>
-            <tr>
-              <td>Value</td>
-              <td>x</td>
-              <td>y</td>
-            </tr>
-            <tr>
-              <td>Root 1</td>
-              <td>
-                {x1}
-              </td>
-              <td>0</td>
-            </tr>          
-            <tr>
-              <td>Root 2</td>
-              <td>
-                {x2}
-              </td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>Root 3</td>
-              <td>
-                {x3}
-              </td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>y-intercept</td>
-              <td>0</td>
-              <td>
-                {d_val}
-              </td>
-            </tr>
-          </table>
-        </div>
+      <div>
+        <table>
+          <tr>
+            <td>p</td>
+            <td>
+              {p_val}
+            </td>
+          </tr>
+          <tr>
+            <td>q</td>
+            <td>
+              {q_val}
+            </td>
+          </tr>
+          <tr>
+            <td>Discriminant</td>
+            <td>
+              {delta_val}
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td>Value</td>
+            <td>x</td>
+            <td>y</td>
+          </tr>
+          <tr>
+            <td>Root 1</td>
+            <td>
+              {x1}
+            </td>
+            <td>0</td>
+          </tr>          
+          <tr>
+            <td>Root 2</td>
+            <td>
+              {x2}
+            </td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Root 3</td>
+            <td>
+              {x3}
+            </td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>y-intercept</td>
+            <td>0</td>
+            <td>
+              {d_val}
+            </td>
+          </tr>
+        </table>
+      </div>
     )
-
-
-
-
-
-
-
-
-
-
-
 
 // Below is including original classes (to make putting inline CSS easier later)
 

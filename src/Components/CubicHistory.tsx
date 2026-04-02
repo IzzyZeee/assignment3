@@ -1,27 +1,14 @@
 import type{ Coefficient, UpdateCoefficient } from "../TypesToUse/Types.tsx";
 import { useState, useEffect } from "react";
 
-export default function CubicTable
+type CubicHistoryProperty = {
+  currentHistory: Coefficient[];
+  onSelect: (item : Coefficient) => void;
+}
 
-({ coefficients, update }: UpdateCoefficient) {
-    
-    const [a, setA] = useState<string>(""); 
-    const [b, setB] = useState<string>(""); 
-    const [c, setC] = useState<string>(""); 
-    const [d, setD] = useState<string>(""); 
+export default function CubicHistory
 
-    useEffect (() => {
-
-      if (coefficients.a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
-          return;
-        }
-
-      setA(String(coefficients.a));
-      setB(String(coefficients.b));
-      setC(String(coefficients.c));
-      setD(String(coefficients.d));
-            
-    }, [coefficients]); // useEffect's second parameter [] means it'll run EACH TIME [] udpates
+({ coefficients, update, history, saveHistory, onSelect }: UpdateCoefficient) {
 
     return (
       // <div>
@@ -40,6 +27,16 @@ export default function CubicTable
             <td>c</td>
             <td>d</td>
           </tr>
+            {history.map((coefficients) => (
+               <tr
+                onClick = {() => onSelect(coefficients)}
+               >
+                <td>{coefficients.a}</td>
+                <td>{coefficients.b}</td>
+                <td>{coefficients.c}</td>
+                <td>{coefficients.d}</td>
+              </tr>
+            ))}
         </table>
       </div>
     )

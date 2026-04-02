@@ -10,7 +10,7 @@ import CubicTable from "./Components/CubicTable.tsx";
 function App() {
 
 const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SSOT. It's a state of type Coefficient. Sets default values for abcd (a can't be 0)
-// const inputRef = useRef<HTMLInputElement | null>(null);
+const [history, setHistory] = useState<Coefficient[]>([]); // For saving history (array of type Coefficient)
 
   return (
 
@@ -18,24 +18,36 @@ const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SS
       <CubicInput
         coefficients={input} // putting in parameters of CubicInput, coefficients and update
         update={setInput} // input and setInput are defined above
+        history={history}
+        saveHistory={setHistory}
+        onSelect = {setInput}
       >
       </CubicInput>
 
       <CubicEquation
         coefficients={input} // Anything with input will be instantly updated (cuz it's the same state)
         update={setInput}
+        history={history}
+        saveHistory={setHistory}
+        onSelect = {setInput}
       >
       </CubicEquation>
 
       <CubicTable
         coefficients={input}
         update={setInput}
+        history={history}
+        saveHistory={setHistory}
+        onSelect = {setInput}
       >
       </CubicTable>
 
       <CubicGraph
         coefficients={input}
         update={setInput}
+        history={history}
+        saveHistory={setHistory}
+        onSelect = {setInput}
       >
       </CubicGraph>      
 
@@ -60,19 +72,10 @@ const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SS
       <CubicHistory
         coefficients={input}
         update={setInput}
+        history={history}
+        saveHistory={setHistory}
+        onSelect = {setInput} // Definition for onSelect
       >
-        <table>
-          {items.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </table>
-      
-      <button
-        onClick={() => setItems([...items, "New Item"])}
-      >
-        Save that cubic!
-      </button>
-
       </CubicHistory>
     </div>
 

@@ -1,3 +1,5 @@
+import type{ Coefficient, UpdateCoefficient } from "./TypesToUse/Types.tsx";
+
 export function trueZero(n: number) { // To rid of floating point errors. Threshold may vary
     const threshold = 1e-15;
 
@@ -49,4 +51,8 @@ if (delta === 0) { // Case C: Delta equals 0
     }
 
     return [x1, x2, x3]; // Returns array
+}
+
+export function saveHistory(saves: Coefficient) {
+    return 
 }

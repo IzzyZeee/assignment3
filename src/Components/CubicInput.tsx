@@ -1,10 +1,9 @@
 import type{ Coefficient, UpdateCoefficient } from "../TypesToUse/Types.tsx";
-import { useState, useRef } from "react";
 
 export default function CubicInput
 
-({ coefficients, update }: UpdateCoefficient) {
-    
+({ coefficients, update, history, saveHistory }: UpdateCoefficient) {
+
     return (
         <div>
             <div className="INSERTCSS">
@@ -59,6 +58,13 @@ export default function CubicInput
                     className="INSERTCSS" 
                 >
                 </input>
+            </div>
+            <div>
+                <button // For CubicHistory
+                    onClick = {() => {saveHistory([...history, coefficients]);}} // Uses saveHistory to add the current coefficients (abcd) to history array (which is type Coefficients)
+                >
+                    Save that cubic!
+                </button>
             </div>
         </div>
     );
