@@ -7,7 +7,7 @@ import CubicHistory from "./Components/CubicHistory.tsx";
 import CubicInput from "./Components/CubicInput.tsx";
 import CubicTable from "./Components/CubicTable.tsx";
 
-function App() {
+export default function App() {
 
 const [input, setInput] = useState<Coefficient>({a: 1, b: 0, c: 0, d: 0}); // SSOT. It's a state of type Coefficient. Sets default values for abcd (a can't be 0)
 const [history, setHistory] = useState<Coefficient[]>([]); // For saving history (array of type Coefficient)
@@ -49,25 +49,7 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
         saveHistory={setHistory}
         onSelect = {setInput}
       >
-      </CubicGraph>      
-
-      {/* <table>
-        <tr>
-          <td>a</td>
-          <td>b</td>
-          <td>c</td>
-          <td>d</td>
-        </tr>
-        <tr onClick={ () => 
-          <CubicHistory
-            coefficients={input}
-            update={setInput}
-          >
-          </CubicHistory>
-        }>
-          
-        </tr>
-      </table> */}
+      </CubicGraph>
 
       <CubicHistory
         coefficients={input}
@@ -78,8 +60,5 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
       >
       </CubicHistory>
     </div>
-
   )
 }
-
-export default App

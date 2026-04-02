@@ -47,57 +47,67 @@ export default function CubicEquation
       }
 
     }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
-
+  
     return (
-      <div>
-        <table>
-          <tr>
-            <td>p</td>
-            <td>
+      <div style={{"width":"550px","marginBottom":"50px","borderRadius":"5px","boxShadow":"5px 5px 20px rgba(1, 14, 19, 0.4)","backgroundColor":"rgba(255, 255, 255)"}}>
+        <table style={{"fontSize":"20px"}}>
+          <tr style={{"height":"40px"}}>
+            <td style={{"width":"150px","borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+              p
+            </td>
+            <td style={{"width":"400px","borderBottom":"1px dashed rgba(62, 98, 95)"}}>
               {p_val}
             </td>
           </tr>
-          <tr>
-            <td>q</td>
-            <td>
+          <tr style={{"height":"40px"}}>
+            <td style={{"borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+              q
+            </td>
+            <td style={{"borderBottom":"1px dashed rgba(62, 98, 95)"}}>
               {q_val}
             </td>
           </tr>
-          <tr>
+          <tr style={{"height":"40px"}}>
             <td>Discriminant</td>
             <td>
               {delta_val}
             </td>
           </tr>
         </table>
-        <table>
-          <tr>
-            <td>Value</td>
-            <td>x</td>
-            <td>y</td>
+        <table style={{"fontSize":"20px"}}>
+          <tr style={{"width":"100px","height":"40px","color":"rgba(255, 255, 255)","backgroundColor":"rgba(62, 98, 95)"}}>
+            <td style={{"width":"150px"}}>
+              Value
+            </td>
+            <td style={{"width":"200px"}}>
+              x
+            </td>
+            <td style={{"width":"200px"}}>
+              y
+            </td>
           </tr>
-          <tr>
+          <tr style={{"height":"40px"}}>
             <td>Root 1</td>
             <td>
               {x1}
             </td>
             <td>0</td>
           </tr>          
-          <tr>
+          <tr style={{"height":"40px"}}>
             <td>Root 2</td>
             <td>
               {x2}
             </td>
             <td>0</td>
           </tr>
-          <tr>
+          <tr style={{"height":"40px"}}>
             <td>Root 3</td>
             <td>
               {x3}
             </td>
             <td>0</td>
           </tr>
-          <tr>
+          <tr style={{"height":"40px"}}>
             <td>y-intercept</td>
             <td>0</td>
             <td>
@@ -107,66 +117,4 @@ export default function CubicEquation
         </table>
       </div>
     )
-
-// Below is including original classes (to make putting inline CSS easier later)
-
-    // return (
-    //     <div>
-    //       <table className="INSERTCSS">
-    //         <tr className="table-row">
-    //           <td className="half-col border-bottom">p</td>
-    //           <td className="half-col border-bottom">
-    //             {p}
-    //           </td>
-    //         </tr>
-    //         <tr className="table-row">
-    //           <td className="border-bottom">q</td>
-    //           <td className="border-bottom">
-    //             {q}
-    //           </td>
-    //         </tr>
-    //         <tr className="table-row">
-    //           <td>Discriminant</td>
-    //           <td>
-    //             {delta}
-    //           </td>
-    //         </tr>
-    //       </table>
-    //       <table className="font">
-    //         <tr className="table-row colored-row" >
-    //           <td className="half-col">Value</td>
-    //           <td className="quarter-col">x</td>
-    //           <td className="quarter-col">y</td>
-    //         </tr>
-    //         <tr className="table-row">
-    //           <td className="border-bottom">Root 1</td>
-    //           <td className="border-bottom">
-    //             {x1}
-    //           </td>
-    //           <td className="border-bottom">0</td>
-    //         </tr>          
-    //         <tr className="table-row">
-    //           <td className="border-bottom">Root 2</td>
-    //           <td className="border-bottom">
-    //             {x2}
-    //           </td>
-    //           <td className="border-bottom">0</td>
-    //         </tr>
-    //         <tr className="table-row">
-    //           <td className="border-bottom">Root 3</td>
-    //           <td className="border-bottom">
-    //             {x3}
-    //           </td>
-    //           <td className="border-bottom">0</td>
-    //         </tr>
-    //         <tr className="table-row">
-    //           <td>y-intercept</td>
-    //           <td>0</td>
-    //           <td>
-    //             {d}
-    //           </td>
-    //         </tr>
-    //       </table>
-    //     </div>
-    // )
 }

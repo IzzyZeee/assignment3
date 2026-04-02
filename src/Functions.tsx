@@ -52,7 +52,3 @@ if (delta === 0) { // Case C: Delta equals 0
 
     return [x1, x2, x3]; // Returns array
 }
-
-export function saveHistory(saves: Coefficient) {
-    return 
-}
