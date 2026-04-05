@@ -14,6 +14,10 @@ export default function CubicEquation
         const c = coefficients.c;
         const d = coefficients.d;
 
+        if (a == 0) { // a-value cannot be zero. Does nothing until valid a-value is put
+            return;
+        }
+
         function term(coefficient: number, power: number) { // Returns terms so you can put them in an equation
 
             let result = "";
@@ -44,7 +48,7 @@ export default function CubicEquation
     return (
         <div>
             <label 
-                className="INSERTCSS"
+                className="p-[10px] rounded-[5px] mb-[50px] mr-[50px] ml-[50px] bg-[white]"
                 dangerouslySetInnerHTML={{ __html: equation }} // Used to straight-up put HTML into the site, a lazy fix of sorts
             >
             </label>

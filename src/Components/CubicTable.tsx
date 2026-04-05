@@ -49,65 +49,65 @@ export default function CubicEquation
     }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
   
     return (
-      <div style={{"width":"550px","marginBottom":"50px","padding":"10px","borderRadius":"5px","boxShadow":"5px 5px 20px rgba(1, 14, 19, 0.4)","backgroundColor":"rgba(255, 255, 255)"}}>
-        <table style={{"fontSize":"20px"}}>
-          <tr style={{"height":"40px"}}>
-            <td style={{"width":"150px","borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+      <div className="w-[550px] mb-[50px] p-[10px] rounded-[5px] shadow-[5px 5px 20px rgba(1, 14, 19, 0.4)] bg-white">
+        <table className="text-[20px]">
+          <tr className="h-[40px]">
+            <td className="w-[150px] border-b border-dashed border-[rgba(62, 98, 95)]">
               p
             </td>
-            <td style={{"width":"400px","borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+            <td className="w-[400px] border-b border-dashed border-[rgba(62, 98, 95)]">
               {p_val}
             </td>
           </tr>
-          <tr style={{"height":"40px"}}>
-            <td style={{"borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+          <tr className="h-[40px]">
+            <td className="border-b border-dashed border-[rgba(62, 98, 95)]">
               q
             </td>
-            <td style={{"borderBottom":"1px dashed rgba(62, 98, 95)"}}>
+            <td className="border-b border-dashed border-[rgba(62, 98, 95)]">
               {q_val}
             </td>
           </tr>
-          <tr style={{"height":"40px"}}>
+          <tr className="h-[40px]">
             <td>Discriminant</td>
             <td>
               {delta_val}
             </td>
           </tr>
         </table>
-        <table style={{"fontSize":"20px"}}>
-          <tr style={{"width":"200px","height":"40px","color":"rgba(255, 255, 255)","backgroundColor":"rgba(62, 98, 95)"}}>
-            <td style={{"width":"150px"}}>
+        <table className="text-[20px]">
+          <tr className="w-[200px] h-[40px] text-white bg-[rgb(62,98,95)]">
+            <td className="w-[150px]">
               Value
             </td>
-            <td style={{"width":"200px"}}>
+            <td className="w-[200px]">
               x
             </td>
-            <td style={{"width":"200px"}}>
+            <td className="w-[200px]">
               y
             </td>
           </tr>
-          <tr style={{"height":"40px"}}>
+          <tr className="h-[40px]">
             <td>Root 1</td>
             <td>
               {x1}
             </td>
             <td>0</td>
           </tr>          
-          <tr style={{"height":"40px"}}>
+          <tr className="h-[40px]">
             <td>Root 2</td>
             <td>
               {x2}
             </td>
             <td>0</td>
           </tr>
-          <tr style={{"height":"40px"}}>
+          <tr className="h-[40px]">
             <td>Root 3</td>
             <td>
               {x3}
             </td>
             <td>0</td>
           </tr>
-          <tr style={{"height":"40px"}}>
+          <tr className="h-[40px]">
             <td>y-intercept</td>
             <td>0</td>
             <td>

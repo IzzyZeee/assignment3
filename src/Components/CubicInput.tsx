@@ -6,7 +6,8 @@ export default function CubicInput
 
     return (
         <div>
-            <div style={{"display":"flex","flexWrap":"wrap","alignItems":"center","justifyContent":"center","gap":"20px","fontSize":"20px"}}>
+            <div 
+            className="flex flex-wrap items-center justify-center gap-[20px] text-[20px]">
                 <label className="INSERTCSS">
                     a-value:
                 </label>

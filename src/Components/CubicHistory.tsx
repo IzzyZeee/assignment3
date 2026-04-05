@@ -9,18 +9,9 @@ type CubicHistoryProperty = {
 export default function CubicHistory
 
 ({ coefficients, update, history, saveHistory, onSelect }: UpdateCoefficient) {
-
     return (
-      // <div>
-      //     <tr>
-      //       <td>{a}</td>
-      //       <td>{b}</td>
-      //       <td>{c}</td>
-      //       <td>{d}</td>
-      //     </tr>
-      // </div>
       <div>
-        <table>
+        <table className="p-[10px] rounded-[5px] mb-[50px] mr-[50px] ml-[50px] bg-white">
           <tr>
             <td>a</td>
             <td>b</td>
