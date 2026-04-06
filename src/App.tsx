@@ -14,51 +14,61 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
 
   return (
 
-    <div style={{"fontFamily":"courier-new, verdana, arial, sans-serif","lineHeight":"1.67","fontWeight":"400","colorScheme":"light","color":"rgba(9, 69, 74, 0.87)","backgroundImage":"linear-gradient(200deg, rgba(62, 98, 95), rgba(80, 152, 146))"}}>
-      <CubicInput
-        coefficients={input} // putting in parameters of CubicInput, coefficients and update
-        update={setInput} // input and setInput are defined above
-        history={history}
-        saveHistory={setHistory}
-        onSelect = {setInput}
+    <div className="min-h-screen font-['verdana'] font-normal leading-[1.67] text-[rgb(9_69_74)] bg-gradient-to-t to-[rgb(62_98_95)] from-[rgb(80_152_146)]">
+      <div
+        className="flex flex-row justify-center pt-[100px]"
       >
-      </CubicInput>
+        <CubicInput
+          coefficients={input} // putting in parameters of CubicInput, coefficients and update
+          update={setInput} // input and setInput are defined above
+          history={history}
+          saveHistory={setHistory}
+          onSelect = {setInput}
+        >
+        </CubicInput>
+        
+        <div className="p-[10px]">
+          <div className="mb-[16px]">
+            <CubicEquation
+              coefficients={input} // Anything with input will be instantly updated (cuz it's the same state)
+              update={setInput}
+              history={history}
+              saveHistory={setHistory}
+              onSelect = {setInput}
+            >
+            </CubicEquation>
+          </div>
 
-      <CubicEquation
-        coefficients={input} // Anything with input will be instantly updated (cuz it's the same state)
-        update={setInput}
-        history={history}
-        saveHistory={setHistory}
-        onSelect = {setInput}
-      >
-      </CubicEquation>
+          <CubicTable
+            coefficients={input}
+            update={setInput}
+            history={history}
+            saveHistory={setHistory}
+            onSelect = {setInput}
+          >
+          </CubicTable>
+        </div>
+      </div>
 
-      <CubicTable
-        coefficients={input}
-        update={setInput}
-        history={history}
-        saveHistory={setHistory}
-        onSelect = {setInput}
-      >
-      </CubicTable>
+      <div className="flex flex-row justify-center mt-[40px]">
+        <CubicGraph
+          coefficients={input}
+          update={setInput}
+          history={history}
+          saveHistory={setHistory}
+          onSelect = {setInput}
+        >
+        </CubicGraph>
 
-      <CubicGraph
-        coefficients={input}
-        update={setInput}
-        history={history}
-        saveHistory={setHistory}
-        onSelect = {setInput}
-      >
-      </CubicGraph>
-
-      <CubicHistory
-        coefficients={input}
-        update={setInput}
-        history={history}
-        saveHistory={setHistory}
-        onSelect = {setInput} // Definition for onSelect
-      >
-      </CubicHistory>
+        <CubicHistory
+          coefficients={input}
+          update={setInput}
+          history={history}
+          saveHistory={setHistory}
+          onSelect = {setInput} // Definition for onSelect
+        >
+        </CubicHistory>
+      </div>
     </div>
   )
 }

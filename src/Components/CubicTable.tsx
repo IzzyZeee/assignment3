@@ -49,21 +49,21 @@ export default function CubicEquation
     }, [coefficients]); // useEffect's second parameter [] means it'll only run when [] udpates
   
     return (
-      <div className="w-[550px] mb-[50px] p-[10px] rounded-[5px] shadow-[5px 5px 20px rgba(1, 14, 19, 0.4)] bg-white">
+      <div className="w-[550px] p-[10px] rounded-[5px] shadow-[5px 5px 20px rgba(1, 14, 19, 0.4)] bg-white">
         <table className="text-[20px]">
           <tr className="h-[40px]">
-            <td className="w-[150px] border-b border-dashed border-[rgba(62, 98, 95)]">
+            <td className="w-[150px] border-b border-dashed border-[rgb(62_98_95)]">
               p
             </td>
-            <td className="w-[400px] border-b border-dashed border-[rgba(62, 98, 95)]">
+            <td className="w-[400px] border-b border-dashed border-[rgb(62_98_95)]">
               {p_val}
             </td>
           </tr>
           <tr className="h-[40px]">
-            <td className="border-b border-dashed border-[rgba(62, 98, 95)]">
+            <td className="border-b border-dashed border-[rgb(62_98_95)]">
               q
             </td>
-            <td className="border-b border-dashed border-[rgba(62, 98, 95)]">
+            <td className="border-b border-dashed border-[rgb(62_98_95)]">
               {q_val}
             </td>
           </tr>
@@ -86,21 +86,21 @@ export default function CubicEquation
               y
             </td>
           </tr>
-          <tr className="h-[40px]">
+          <tr className="h-[40px] border-b border-dashed border-[rgb(62_98_95)]">
             <td>Root 1</td>
             <td>
               {x1}
             </td>
             <td>0</td>
           </tr>          
-          <tr className="h-[40px]">
+          <tr className="h-[40px] border-b border-dashed border-[rgb(62_98_95)]">
             <td>Root 2</td>
             <td>
               {x2}
             </td>
             <td>0</td>
           </tr>
-          <tr className="h-[40px]">
+          <tr className="h-[40px] border-b border-dashed border-[rgb(62_98_95)]">
             <td>Root 3</td>
             <td>
               {x3}

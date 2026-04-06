@@ -179,7 +179,7 @@ export default function CubicGraph
 
     return (
         <div 
-        className="w-[620px] h-[620px] p-[10px] rounded-[5px] mb-[50px] ml-[50px] mr-[50px] bg-white">
+        className="w-[620px] h-[620px] p-[10px] rounded-[5px] mb-[50px] ml-[50px] mr-[10px] shadow-[5px 5px 20px rgba(1, 14, 19, 0.4)] bg-white">
             <canvas ref={canvasRef} width="600" height="600">
             </canvas>
         </div>

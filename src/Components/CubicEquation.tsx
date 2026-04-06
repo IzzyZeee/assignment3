@@ -48,8 +48,8 @@ export default function CubicEquation
     return (
         <div>
             <label 
-                className="p-[10px] rounded-[5px] mb-[50px] mr-[50px] ml-[50px] bg-[white]"
-                dangerouslySetInnerHTML={{ __html: equation }} // Used to straight-up put HTML into the site, a lazy fix of sorts
+                className="text-white text-[20px] p-[10px] mb-[50px] ml-[10px] mr-[50px]"
+                dangerouslySetInnerHTML={{ __html: equation }} // Used to straight-up put HTML into the site, a quick fix of sorts
             >
             </label>
         </div>
