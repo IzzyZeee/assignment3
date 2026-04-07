@@ -16,6 +16,12 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
 
     <div className="min-h-screen font-['verdana'] font-normal leading-[1.67] text-[rgb(9_69_74)] bg-gradient-to-t to-[rgb(62_98_95)] from-[rgb(80_152_146)]">
       <div
+        className="flex flex-row justify-center pt-[80px] text-white text-[67px]"
+      >
+        Cubic Solver
+      </div>
+
+      <div
         className="flex flex-row justify-center pt-[100px]"
       >
         <CubicInput
@@ -60,14 +66,19 @@ const [history, setHistory] = useState<Coefficient[]>([]); // For saving history
         >
         </CubicGraph>
 
-        <CubicHistory
-          coefficients={input}
-          update={setInput}
-          history={history}
-          saveHistory={setHistory}
-          onSelect = {setInput} // Definition for onSelect
+        <div
+          className="flex flex-col"
         >
-        </CubicHistory>
+          <div className="text-white text-[20px]"> History </div>
+          <CubicHistory
+            coefficients={input}
+            update={setInput}
+            history={history}
+            saveHistory={setHistory}
+            onSelect = {setInput} // Definition for onSelect
+          >
+          </CubicHistory>
+        </div>
       </div>
     </div>
   )
